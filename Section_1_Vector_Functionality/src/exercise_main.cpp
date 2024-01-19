@@ -1,6 +1,8 @@
 #include <iostream>
-#include "vector_functions.h"
 #include <string>
+#include <algorithm>
+#include <vector>
+#include "vector_functions.h"
 
 bool check_add_elements()
 {
@@ -28,15 +30,21 @@ int main()
 {
     std::vector<int> some_multiples = {1, 5, 3, 10, 0, 2};
     int count = countMultiplesOfFive(some_multiples);
+    int count1 = std::count_if(some_multiples.begin(), some_multiples.end(), count_Five);
     std::cout << (count == 3 ? "Check 1 passed" : "Failed first check, should find 3 multiples and found " + std::to_string(count)) << std::endl;
-    
+    std::cout << (count1 == 3 ? "Check 2 passed" : "Failed third check, should find 0 multiples and found " + std::to_string(count1)) << std::endl;
+
     std::vector<int> no_multiples = {2, 3, 9, 18, 47};
     count = countMultiplesOfFive(no_multiples);
-    std::cout << (count == 3 ? "Check 1 passed" : "Failed second check, should find 0 multiples and found " + std::to_string(count)) << std::endl;
+    count1 = std::count_if(no_multiples.begin(), no_multiples.end(), count_Five);
+    std::cout << (count == 0 ? "Check 1 passed" : "Failed second check, should find 0 multiples and found " + std::to_string(count)) << std::endl;
+    std::cout << (count1 == 0 ? "Check 2 passed" : "Failed third check, should find 0 multiples and found " + std::to_string(count1)) << std::endl;
 
     std::vector<int> empty_vector;
     count = countMultiplesOfFive(empty_vector);
-    std::cout << (count == 3 ? "Check 1 passed" : "Failed third check, should find 0 multiples and found " + std::to_string(count)) << std::endl;
+    count1 = std::count_if(empty_vector.begin(), empty_vector.end(), count_Five);
+    std::cout << (count == 0 ? "Check 1 passed" : "Failed third check, should find 0 multiples and found " + std::to_string(count)) << std::endl;
+    std::cout << (count1 == 0 ? "Check 2 passed" : "Failed third check, should find 0 multiples and found " + std::to_string(count1)) << std::endl;
     
     return 0;
 }
